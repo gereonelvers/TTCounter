@@ -1,0 +1,136 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:id="@+id/scoreView">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:paddingBottom="8dp"
+                android:paddingTop="16dp"
+                android:text="Player A"
+                android:textColor="#616161"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/player_a_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:paddingBottom="12dp"
+                android:paddingTop="8dp"
+                android:text="0"
+                android:textColor="#000000"
+                android:textSize="56sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:onClick="addOneForPlayerA"
+                android:text="+"
+                android:layout_gravity="center"
+                android:textSize="25sp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray"></View>
+
+        <LinearLayout
+            android:id="@+id/teamB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:paddingBottom="8dp"
+                android:paddingTop="16dp"
+                android:text="Player B"
+                android:textColor="#616161"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/player_b_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:paddingBottom="12dp"
+                android:paddingTop="8dp"
+                android:text="0"
+                android:textColor="#000000"
+                android:textSize="56sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:onClick="addOneForPlayerB"
+                android:text="+"
+                android:layout_gravity="center"
+                android:textSize="25sp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:background="@android:color/darker_gray"
+        android:layout_below="@id/scoreView"
+        ></View>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:paddingBottom="12dp"
+        android:paddingTop="16dp"
+        android:text="Please start the game to view stats"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_below="@id/scoreView"
+        android:id="@+id/scoreText"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:paddingBottom="12dp"
+        android:paddingTop="8dp"
+        android:text="PlayerA has to serve"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_below="@id/scoreText"
+        android:id="@+id/serveText"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="8dp"
+        android:onClick="resetScore"
+        android:text="Reset" />
+</RelativeLayout>

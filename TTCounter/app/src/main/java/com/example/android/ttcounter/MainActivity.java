@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     String scoreText1 = "Currently ";
     String scoreText2 = " is in the lead, the score is ";
     String scoreText3 = ":";
+    int playerAGames = 0;
+    int playerBGames = 0;
 
     String serveText = " has to serve";
 
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
         if(scorePlayerA >= 12 & scorePlayerB + 2 <= scorePlayerA){
             displayScoreText("PlayerA has won!");
+            playerAGames = playerAGames + 1;
+            displayPlayerAGames(playerAGames);
             scorePlayerA = 0;
             scorePlayerB = 0;
             AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -88,11 +92,28 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
             alertDialog.show();
+            playerBGames = playerBGames + 1;
+            displayPlayerBGames(playerBGames);
             displayForTeamA(scorePlayerA);
-            displayForTeamB(scorePlayerB);}
+            displayForTeamB(scorePlayerB);
+        }
     }
 
 
+
+    /**
+     * Resets Scores and Games
+     */
+    public void resetAll(View v) {
+        scorePlayerA = 0;
+        scorePlayerB = 0;
+        playerAGames = 0;
+        playerBGames = 0;
+        displayForTeamA(scorePlayerA);
+        displayForTeamB(scorePlayerB);
+        displayPlayerAGames(playerAGames);
+        displayPlayerBGames(playerBGames);
+    }
 
     /**
      * Resets Scores
@@ -118,6 +139,22 @@ public class MainActivity extends AppCompatActivity {
     public void displayServeText(String serve) {
         TextView scoreView = (TextView) findViewById(R.id.serveText);
         scoreView.setText(String.valueOf(serve));
+    }
+
+    /**
+     * Displays PlayerA's won games
+     */
+    public void displayPlayerAGames(int games) {
+        TextView scoreView = (TextView) findViewById(R.id.player_a_games);
+        scoreView.setText(String.valueOf(games));
+    }
+
+    /**
+     * Displays PlayerB's won games
+     */
+    public void displayPlayerBGames(int games) {
+        TextView scoreView = (TextView) findViewById(R.id.player_b_games);
+        scoreView.setText(String.valueOf(games));
     }
 
     /**

@@ -46,7 +46,7 @@
                 android:onClick="addOneForPlayerA"
                 android:text="+"
                 android:layout_gravity="center"
-                android:textSize="25sp"/>
+                android:textSize="25sp" />
         </LinearLayout>
 
         <View
@@ -126,11 +126,69 @@
         android:textSize="20sp"
         android:layout_below="@id/scoreText"
         android:id="@+id/serveText"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:paddingBottom="12dp"
+        android:paddingTop="8dp"
+        android:text="Games won:"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:layout_above="@id/gameScores"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_above="@id/reset_games"
+        android:id="@+id/gameScores">
+        <TextView
+            android:id="@+id/player_a_games"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:paddingBottom="12dp"
+            android:paddingTop="8dp"
+            android:text="0"
+            android:textColor="#000000"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/player_b_games"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:paddingBottom="12dp"
+            android:paddingTop="8dp"
+            android:text="0"
+            android:textColor="#000000"
+            android:textSize="40sp" />
+
+    </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="0dp"
+        android:onClick="resetScore"
+        android:text="Reset scores"
+        android:id="@+id/reset_games"
+        android:layout_above="@id/reset"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="8dp"
-        android:onClick="resetScore"
-        android:text="Reset" />
+        android:onClick="resetAll"
+        android:text="Reset everything"
+        android:id="@+id/reset"/>
 </RelativeLayout>

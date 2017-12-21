@@ -1,5 +1,10 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:fillViewport="true">
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
@@ -101,6 +106,7 @@
         android:layout_height="1sp"
         android:background="@android:color/darker_gray"
         android:layout_below="@id/scoreView"
+        android:id="@+id/line"
         ></View>
     <TextView
         android:layout_width="match_parent"
@@ -109,10 +115,10 @@
         android:gravity="center"
         android:paddingBottom="12dp"
         android:paddingTop="16dp"
-        android:text="Please start the game to view stats"
+        android:text="Currently no one is leading"
         android:textColor="#000000"
         android:textSize="20sp"
-        android:layout_below="@id/scoreView"
+        android:layout_below="@id/line"
         android:id="@+id/scoreText"/>
     <TextView
         android:layout_width="match_parent"
@@ -137,13 +143,14 @@
         android:text="Games won:"
         android:textColor="#000000"
         android:textSize="30sp"
-        android:layout_above="@id/gameScores"/>
+        android:layout_below="@id/serveText"
+        android:id="@+id/gamesWonText"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_above="@id/reset_games"
+        android:layout_below="@id/gamesWonText"
         android:id="@+id/gameScores">
         <TextView
             android:id="@+id/player_a_games"
@@ -182,13 +189,14 @@
         android:onClick="resetScore"
         android:text="Reset scores"
         android:id="@+id/reset_games"
-        android:layout_above="@id/reset"/>
+        android:layout_below="@id/gameScores"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/reset_games"
         android:layout_margin="8dp"
         android:onClick="resetAll"
         android:text="Reset everything"
         android:id="@+id/reset"/>
 </RelativeLayout>
+</ScrollView>

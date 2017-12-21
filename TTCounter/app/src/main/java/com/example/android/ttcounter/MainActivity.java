@@ -4,12 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
-import com.example.android.ttcounter.R;
 
 public class MainActivity extends AppCompatActivity {
     int scorePlayerA = 0;
@@ -26,7 +22,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (savedInstanceState != null) {
+            scorePlayerA = savedInstanceState.getInt("scorePlayerA");
+            scorePlayerB = savedInstanceState.getInt("scorePlayerB");
+            playerAGames = savedInstanceState.getInt("playerAGames");
+            playerBGames = savedInstanceState.getInt("playerBGames");
+            displayForTeamA(scorePlayerA);
+            displayForTeamB(scorePlayerB);
+            displayPlayerAGames(playerAGames);
+            displayPlayerBGames(playerBGames);
+        }
     }
+
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt("scorePlayerA", scorePlayerA);
+        savedInstanceState.putInt("scorePlayerB", scorePlayerB);
+        savedInstanceState.putInt("playerAGames", playerAGames);
+        savedInstanceState.putInt("playerBGames", playerBGames);
+    }
+
 
     /**
      * Increase the score for Team A by 1 point.
@@ -35,14 +50,21 @@ public class MainActivity extends AppCompatActivity {
         scorePlayerA = scorePlayerA + 1;
         displayForTeamA(scorePlayerA);
 
-        if(scorePlayerA > scorePlayerB){ displayScoreText(scoreText1 + "PlayerA" + scoreText2 + scorePlayerA + scoreText3 + scorePlayerB); }
-        else if(scorePlayerB > scorePlayerA){displayScoreText(scoreText1 + "PlayerB" + scoreText2 + scorePlayerA + scoreText3 + scorePlayerB);}
-        else {displayScoreText("Currently the score is even at " + scorePlayerA + scoreText3 + scorePlayerB);}
+        if (scorePlayerA > scorePlayerB) {
+            displayScoreText(scoreText1 + "PlayerA" + scoreText2 + scorePlayerA + scoreText3 + scorePlayerB);
+        } else if (scorePlayerB > scorePlayerA) {
+            displayScoreText(scoreText1 + "PlayerB" + scoreText2 + scorePlayerA + scoreText3 + scorePlayerB);
+        } else {
+            displayScoreText("Currently the score is even at " + scorePlayerA + scoreText3 + scorePlayerB);
+        }
 
-        if((scorePlayerA + scorePlayerB) % 2 == 0 ){displayServeText("PlayerA" + serveText);}
-        else{displayServeText("PlayerB" + serveText);}
+        if ((scorePlayerA + scorePlayerB) % 2 == 0) {
+            displayServeText("PlayerA" + serveText);
+        } else {
+            displayServeText("PlayerB" + serveText);
+        }
 
-        if(scorePlayerA >= 12 & scorePlayerB + 2 <= scorePlayerA){
+        if (scorePlayerA >= 12 & scorePlayerB + 2 <= scorePlayerA) {
             displayScoreText("PlayerA has won!");
             playerAGames = playerAGames + 1;
             displayPlayerAGames(playerAGames);
@@ -58,8 +80,23 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
             alertDialog.show();
-        displayForTeamA(scorePlayerA);
-        displayForTeamB(scorePlayerB);}
+            displayForTeamA(scorePlayerA);
+            displayForTeamB(scorePlayerB);
+        }
+        if (playerAGames >= 3) {
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle("Player A has won everything");
+            alertDialog.setMessage("PlayerA has won the game, the game is over!");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK!",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+            playerAGames = 0;
+            displayPlayerAGames(playerAGames);
+        }
     }
 
 
@@ -70,21 +107,28 @@ public class MainActivity extends AppCompatActivity {
         scorePlayerB = scorePlayerB + 1;
         displayForTeamB(scorePlayerB);
 
-        if(scorePlayerA > scorePlayerB){ displayScoreText(scoreText1 + "PlayerA" + scoreText2 + scorePlayerA + scoreText3 + scorePlayerB); }
-        else if(scorePlayerB > scorePlayerA){displayScoreText(scoreText1 + "PlayerB" + scoreText2 + scorePlayerA + scoreText3 + scorePlayerB);}
-        else {displayScoreText("Currently the score is even at " + scorePlayerA + scoreText3 + scorePlayerB);}
+        if (scorePlayerA > scorePlayerB) {
+            displayScoreText(scoreText1 + "PlayerA" + scoreText2 + scorePlayerA + scoreText3 + scorePlayerB);
+        } else if (scorePlayerB > scorePlayerA) {
+            displayScoreText(scoreText1 + "PlayerB" + scoreText2 + scorePlayerA + scoreText3 + scorePlayerB);
+        } else {
+            displayScoreText("Currently the score is even at " + scorePlayerA + scoreText3 + scorePlayerB);
+        }
 
-        if((scorePlayerA + scorePlayerB) % 2 == 0 ){displayServeText("PlayerA" + serveText);}
-        else{displayServeText("PlayerB" + serveText);}
+        if ((scorePlayerA + scorePlayerB) % 2 == 0) {
+            displayServeText("PlayerA" + serveText);
+        } else {
+            displayServeText("PlayerB" + serveText);
+        }
 
 
-        if(scorePlayerB >= 12 & scorePlayerA + 2 <= scorePlayerB){
+        if (scorePlayerB >= 12 & scorePlayerA + 2 <= scorePlayerB) {
             displayScoreText("PlayerB has won!");
             scorePlayerA = 0;
             scorePlayerB = 0;
             AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
             alertDialog.setTitle("Game over!");
-            alertDialog.setMessage("PlayerB has won, the scores have been reset!");
+            alertDialog.setMessage("PlayerB has won, the scores have been reset! Please switch sides!");
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK!",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -97,8 +141,21 @@ public class MainActivity extends AppCompatActivity {
             displayForTeamA(scorePlayerA);
             displayForTeamB(scorePlayerB);
         }
+        if (playerBGames >= 3) {
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle("Player B has won everything");
+            alertDialog.setMessage("PlayerB has won the game, the game is over!");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK!",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+            playerBGames = 0;
+            displayPlayerBGames(playerBGames);
+        }
     }
-
 
 
     /**
@@ -113,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
         displayForTeamB(scorePlayerB);
         displayPlayerAGames(playerAGames);
         displayPlayerBGames(playerBGames);
+        displayScoreText("Please start the game to view stats");
     }
 
     /**
